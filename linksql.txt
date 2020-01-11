@@ -1,0 +1,205 @@
+/* 0. Create Database & use it */
+CREATE DATABASE BuddhAirBase;
+USE BuddhaAirBase;
+
+/* 1. Create AirCrafts table*/
+CREATE TABLE AirCrafts(
+	AcID INT Primary Key,
+	AcNumber Varchar(32) NOT NULL,
+	Capacity INT NOT NULL,
+	MfdBy Varchar(128) NOT NULL,
+	MfdOn Datetime NOT NULL
+);
+
+/* 1.1 Insert data into AirCrafts table*/
+INSERT INTO AirCrafts
+(AcID, AcNumber, Capacity, MfdBy, MfdOn)
+VALUES
+(1, "ATR 72-500", 75, "Alenia Aeronotica", "23 April 1998");
+
+/* 2. Create Route table*/
+CREATE TABLE Route(
+	RtID INT,
+	Airport Varchar(32) NOT NULL,
+	Destination Varchar(32) NOT NULL,
+	RouteCode Varchar(16) NOT NULL UNIQUE,
+	PRIMARY KEY (RtID)
+);
+
+/* 2.1 Insert data into Route table*/
+INSERT INTO Route
+Values (1, "Kathmandu", "Pokhara", "KTM-PKR");
+
+/* 3. Create AirFare table*/
+CREATE TABLE AirFare(
+	AfID INT,
+	Route INT,
+	Fare Currency,
+	FSC Currency,
+	PRIMARY KEY (AfID),
+	CONSTRAINT fk_Route FOREIGN KEY (Route) REFERENCES Route(RtID)
+);
+
+/* 3.1. Insert DATA into AirFare table*/
+INSERT INTO AirFare 
+VALUES
+(1, 1, 86, 12);
+
+/* 4. Create Flight_Schedule table */
+CREATE TABLE Flight_Schedule(
+	FlID INT,
+	FlightDate DATETIME,
+	Departure DATETIME,
+	Arrival DATETIME,
+	AirCraft INT,
+	NetFare INT,
+	PRIMARY KEY (FlID),
+	CONSTRAINT fk_AirCraft FOREIGN KEY (AirCraft) REFERENCES AirCrafts(AcID),
+	CONSTRAINT fk_NetFare FOREIGN KEY (NetFare) REFERENCES AirFare(AfID)
+);
+
+/* 4.1 Insert DATA into Flight_Schedule */
+INSERT INTO Flight_Schedule
+VALUES
+(1, 'January 23, 2012', '23:20', '1:20', 1, 1);
+
+
+/* 5. Create Discounts table */
+CREATE TABLE Discounts(
+	DiID INT PRIMARY KEY,
+	Title Varchar(32),
+	Amount INT,
+	Description Varchar (255)
+)
+
+/* 5.1 Insert data into Discounts table */
+INSERT INTO Discounts
+VALUES
+(1,'Childrens', 10, 'Discount is provide all childrens under age of 10.');
+
+/* 6. Create Charges table */
+CREATE TABLE Charges(
+	ChID INT PRIMARY KEY,
+	Title Varchar(32),
+	Amount INT,
+	Description Varchar (255)
+)
+
+/* 6.1 Insert data into Charges table */
+INSERT INTO Charges
+VALUES
+(2,'Urgent Cancellation', 33.33, '33.3% will be charged for cancellation for booking within 11 hrs from flight time'); 
+/* 7. Crate Country table*/
+CREATE TABLE Countries (
+	CtID INT PRIMARY KEY,
+	CountryName Varchar (32) NOT NULL
+);
+
+/* 7.1 Insert data into Country table */
+INSERT INTO Countries
+VALUES
+(1, 'Nepal'); 
+
+/* 8. Create State table*/
+CREATE TABLE State(
+	StID INT,
+	StateName Varchar (32),
+	Country INT,
+	PRIMARY KEY (StID),
+	CONSTRAINT fk_Country FOREIGN KEY (Country) REFERENCES Countries(CtID)
+);
+
+/* 8.1. Insert data into State table*/
+INSERT INTO State
+VALUES
+(1, 'Bagmati', 1);
+
+/* 9. Create Contact_Details table*/
+CREATE TABLE Contact_Details(
+	CnID INT PRIMARY KEY,
+	Email Varchar (16) NOT NULL,
+	Cell Varchar (16) NOT NULL,
+	Tel Varchar (16),
+	Street Varchar (64),
+	State INT NOT NULL,
+	CONSTRAINT fk_State FOREIGN KEY (State) REFERENCES State(StID)
+);
+
+/* 9.1 Insert data into Contact_Details */
+INSERT INTO Contact_Details
+VALUES
+(1,'hello@shekhardesigner.com', '9851121824', '01-4215384', 'Gandaki Marga', 1);
+
+
+/* 10. Create Passengers table */
+CREATE TABLE Passengers(
+	PsID INT PRIMARY KEY,
+	Name Varchar (32) NOT NULL,
+	Address Varchar (64) NOT NULL,
+	Age INT NOT NULL,
+	Nationality Varchar(16) NOT NULL,
+	Contacts INT NOT NULL,
+	CONSTRAINT fk_Contacts FOREIGN KEY (Contacts) REFERENCES Contact_Details(CnID)
+);
+
+/* 10.1 Insert data into Passengers table */
+INSERT INTO Passengers
+VALUES
+(1,'Shekhar Kumar Sharma', 'Sinamanga-39, KTM', 23, 'Nepalese', 1); 
+
+/* 11. Create Branch table */
+CREATE TABLE Branches(
+	BrID INT PRIMARY KEY,
+	Center Varchar(16) NOT NULL,
+	Address Varchar(32) NOT NULL,
+	State INT,
+	CONSTRAINT fk_StateOfEmployee FOREIGN KEY (State) REFERENCES State(StID)
+);
+
+/* 11.1 Insert data into branches table */
+INSERT INTO Branches
+VALUES
+(1, 'Kathmandu', 'New Road, Kathmandu', 1); 
+
+/* 12. Create Employee table */
+CREATE TABLE Employee
+(
+	EmpID INT PRIMARY KEY,
+	Name Varchar (32) NOT NULL,
+	Address Varchar (32) NOT NULL,
+	Branch INT NOT NULL,
+	Designation Varchar(32) NOT NULL,
+	Email Varchar (16) NOT NULL,
+	Tel Varchar (16) NOT NULL,
+	Ext INT,
+	CONSTRAINT fk_Branch FOREIGN KEY (Branch) REFERENCES Branches(BrID)
+);
+
+/* 12.1 Insert data into Employee table */
+INSERT INTO Employee
+VALUES
+(1, 'Diwan Adhikari', 'Bagbazaar - 11, KTM', 1, 'Sales Executive', 'the.one@yahoo.com', '01-4215254', 12); 
+
+/* 13. Create table Transactions */
+CREATE TABLE Transactions(
+	TsID INT PRIMARY KEY,
+	BookingDate DATETIME,
+	DepartureDate DATETIME,
+	Passenger INT,
+	Flight INT,
+	Type BIT,
+	Employee INT,
+	Charges INT,
+	Discount INT,
+	CONSTRAINT fk_Passenger FOREIGN KEY (Passenger) REFERENCES Passengers(PsID),
+	CONSTRAINT fk_Flight FOREIGN KEY (Flight) REFERENCES Flight_Schedule(FlID),
+	CONSTRAINT fk_Employee FOREIGN KEY (Employee) REFERENCES Employee(EmpID),
+	CONSTRAINT fk_Charges FOREIGN KEY (Charges) REFERENCES Charges(ChID),
+	CONSTRAINT fk_Discount FOREIGN KEY (Discount) REFERENCES Discounts(DiID)
+);
+
+
+/* 13.1 Insert data into Transactions */
+INSERT INTO Transactions
+VALUES 
+(1,'12 November 2011', '21 December 2011', 1, 1, 0, 1, NULL, NULL); 

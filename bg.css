@@ -1,0 +1,26 @@
+#b1{
+	background: #ff0000;
+	border-radius: 50%;
+  color: white;
+  padding: 1px;
+  cursor: pointer;
+}
+
+form
+{
+  background: #ffffff;
+  font: 14px 'Trebuchet MS';
+  border: 6px solid #ec5355;
+  height: 300px;
+  margin-top: 30px;
+  margin-left: 10px;
+  padding: 20px;
+  width: 300px;
+}
+
+#book {
+  background: #ff0000;
+  color: white;
+  padding: 4px;
+  cursor: pointer;
+}

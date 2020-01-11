@@ -1,0 +1,254 @@
+
+
+
+
+<html>
+<head>
+<title>Welcome to FlyHigh</title>
+<link rel="stylesheet" type="text/css" href="D:\project\bg.css">
+
+<style>
+body
+{
+
+background: url(D:/project/flight.jpg) no-repeat;
+background-size: cover;
+position: fixed;
+
+}
+
+#heading {
+	margin-left:100px;
+    font-size: 1.5em; /* 40px/16=2.5em */
+	font: 'Trebuchet MS';
+	font-style: italic;
+   color: red;
+   text-decoration: none;
+}
+
+h2 {
+    font-size: 1.5em; /* 40px/16=2.5em */
+    color: Blue;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.button {
+    background-color: #4caf50; 
+    border: none;
+    color: white;
+    padding: 3px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; 
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.button1 {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #4CAF50;
+}
+
+.button1:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.button2 {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #008CBA;
+}
+
+.button2:hover {
+    background-color: #008CBA;
+    color: white;
+}
+
+.button3 {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #f44336;
+}
+
+.button3:hover {
+    background-color: #f44336;
+    color: white;
+}
+
+.button4 {
+    background-color: white;
+    color: black;
+    border: 2px solid Black
+}
+
+.button4:hover {background-color: #e7e7e7;}
+
+.button5 {
+    background-color: white;
+    color: black;
+    border: 2px solid #f08080;
+}
+
+.button5:hover {
+    background-color: #f08080;
+    color: white;
+}
+.button6 {
+	background-color:white;
+	color:black;
+	border:2px solid #ff8c00;
+}
+.button6:hover {
+	background-color:#ff8c00;
+	color:white;
+}
+.button7 {
+	background-color:white;
+	color:black;
+	border:2px solid #ff8c00;
+}
+.button7:hover {
+	background-color:#ff8c00;
+	color:white;
+}
+#header {
+    /*background-color:blue;*/
+    color:white;
+    text-align:center;
+    padding:5px;
+}
+
+
+#section {
+    width:950px;
+    height:750px;
+    float:left;
+    padding:20px;
+
+	}
+
+#footer {
+    background-color:black;
+    color:white;
+    clear:both;
+	margin-left: 250px;
+    text-align:center;
+   padding:5px;	 	 
+}
+</style>
+
+
+</head>
+
+
+<body>
+
+<div id="heading">
+<pre><p><img src="D:/project/icon.jpg" alt="image not available" style="margin:8px;float:left;width:60px;height:60px;">FlyHigh<br>Airlines 							                <select name="language">
+<option value="India">India</option>
+<option value="USA">USA</option>
+<option value="UK">UK</option>
+<option value="Australia">Australia</option>
+<option value="Others">Others</option>
+</select><input type="button" id="b1" value="Go">
+</p></pre>
+</div>
+
+
+<div id="header">
+<a href="D:/project/me.html" class="button button1">HOME</a>
+<a href="index.html" class="button button2">MANAGE YOUR TRIP</a>
+<a href="index.html" class="button button3">SPECIAL OFFER</a>
+<a href="index.html" class="button button7">BAGGAGE</a>
+<a href="D:/project/aboutus.html" class="button button5">ABOUT US</a>
+<a href="D:/project/contact.html" class="button button4">CONTACT</a>
+<a href="D:/project/gallery.html" class="button button4">GALLERY</a>
+</div>
+
+<form>
+<input type="radio" name="trip" value="One Way">One Way
+<input type="radio" name="trip" value="Round Trip" checked>Round Trip
+<hr>
+
+From:<input type="text" name="source" autofocus autocomplete="on">
+<br>
+To:<input type="text" name="destination" autocomplete="on">
+<br>
+Departing:<input type="date" name="date1" min="2015-11-26">
+<br>
+Returning:<input type="date" name="date2" min="2015-11-26">
+<br>
+<input type="radio" name="date type" value="Fixed Dates">Fixed Dates
+<input type="radio" name="date type" value="Flexible Dates" checked>Flexible Dates
+<hr>
+Adults: &nbsp; Children: &nbsp; Infants:
+<br>
+<pre><select name="numberofadults">
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
+</select>  	 <select name="numberofchildren">
+<option value="0">0</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
+</select>	  <select name="numberofinfants">
+<option value="0">0</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
+</select>
+</pre>
+<hr>
+<select name="class">
+<option value="Economy">Economy</option>
+<option value="Executive">Executive</option>
+<option value="First">First</option>
+<option value="Executive/Economy">Executive/Economy</option>
+<option value="First/Executive">First/Executive</option>
+</select>
+
+<br><br>
+<input id="book" type="submit" value="Book Now">
+</form> 
+
+
+<div id="footer">
+<h2>FlyHigh With Us</h2>
+<p>
+Keep calm and travel with FlyHigh airlines.
+</p>
+<p>
+You dont have to be rich to travel well.
+</p>
+</div>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,110 @@
+
+CREATE TABLE AirCrafts(
+	AcID INT Primary Key,
+	AcNumber Varchar(32) NOT NULL,
+	Capacity INT NOT NULL,
+	MfdBy Varchar(128) NOT NULL,
+	MfdOn Date NOT NULL
+);
+
+
+
+CREATE TABLE Route(
+	RtID INT,
+	Airport Varchar(32) NOT NULL,
+	Destination Varchar(32) NOT NULL,
+	RouteCode Varchar(16) NOT NULL UNIQUE,
+	PRIMARY KEY (RtID)
+);
+
+
+
+
+
+CREATE TABLE Flight_Schedule(
+	FlID INT,
+	FlightDate DATE,
+	Departure DATE,
+	Arrival DATE,
+	AirCraft INT,
+	NetFare INT,
+	PRIMARY KEY (FlID),
+	 FOREIGN KEY (AirCraft) REFERENCES AirCrafts(AcID),
+	 FOREIGN KEY (NetFare) REFERENCES AirFare(AfID)
+);
+
+
+CREATE TABLE Discounts(
+	DiID INT PRIMARY KEY,
+	Amount INT
+);
+
+
+
+
+
+CREATE TABLE Countries (
+	CtID INT PRIMARY KEY,
+	CountryName Varchar (32) NOT NULL
+);
+
+ 
+CREATE TABLE State(
+	StID INT,
+	StateName Varchar (32),
+	Country INT,
+	PRIMARY KEY (StID),
+	FOREIGN KEY (Country) REFERENCES Countries(CtID)
+);
+
+
+
+
+CREATE TABLE Contact_Details(
+	CnID INT PRIMARY KEY,
+	Email Varchar (16) NOT NULL,
+	Cell Varchar (16) NOT NULL,
+	Tel Varchar (16),
+	State INT NOT NULL,
+	 FOREIGN KEY (State) REFERENCES State(StID)
+);
+
+
+CREATE TABLE Passengers(
+	PsID INT PRIMARY KEY,
+	Name Varchar (32) NOT NULL,
+	Age INT NOT NULL,
+	Contacts INT NOT NULL,
+	 FOREIGN KEY (Contacts) REFERENCES Contact_Details(CnID)
+);
+
+
+
+
+
+CREATE TABLE Employee
+(
+	EmpID INT PRIMARY KEY,
+	Name Varchar (32) NOT NULL,
+	Email Varchar (16) NOT NULL,
+	Tel Varchar (16) NOT NULL
+
+);
+
+CREATE TABLE Transactions(
+	TsID INT PRIMARY KEY,
+	BookingDate DATETIME,
+	DepartureDate DATETIME,
+	Passenger INT,
+	Flight INT,
+	Type BIT,
+	Employee INT,
+	Discount INT,
+	FOREIGN KEY (Passenger) REFERENCES Passengers(PsID),
+	FOREIGN KEY (Flight) REFERENCES Flight_Schedule(FlID),
+	FOREIGN KEY (Employee) REFERENCES Employee(EmpID),
+	 FOREIGN KEY (Discount) REFERENCES Discounts(DiID)
+);
+
+
+ 
